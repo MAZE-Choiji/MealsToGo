@@ -1739,6 +1739,14 @@
   resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-1.3.6.tgz#fa700318528db93f05144b1be4b691b9c1dd1abe"
   integrity sha512-pNJ8R9JMga6SXOw6wGVN0tjmE6vegwPmJBL45SEMX2fqTfAk2ykDnlJHodRpHpAgsv0DaI8qX76z3A+aqKSU0w==
 
+"@react-navigation/native-stack@^6.9.1":
+  version "6.9.1"
+  resolved "https://registry.yarnpkg.com/@react-navigation/native-stack/-/native-stack-6.9.1.tgz#6013300e4cd0b33e242aa18593e4dff7db2ab3d1"
+  integrity sha512-aOuJP97ge6NRz8wH6sDKfLTfdygGmraYh0apKrrVbGvMnflbPX4kpjQiAQcUPUpMeas0betH/Su8QubNL8HEkg==
+  dependencies:
+    "@react-navigation/elements" "^1.3.6"
+    warn-once "^0.1.0"
+
 "@react-navigation/native@^6.0.13":
   version "6.0.13"
   resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-6.0.13.tgz#ec504120e193ea6a7f24ffa765a1338be5a3160a"
@@ -1755,6 +1763,15 @@
   integrity sha512-idJotMEzHc3haWsCh7EvnnZMKxvaS4YF/x2UyFBkNFiEFUaEo/1ioQU6qqmVLspdEv4bI/dLm97hQo7qD8Yl7Q==
   dependencies:
     nanoid "^3.1.23"
+
+"@react-navigation/stack@^6.3.2":
+  version "6.3.2"
+  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-6.3.2.tgz#ba0a65e10e2b165185f20718046f25d8c9abb076"
+  integrity sha512-wb8koMp4OTrG5geOqEFPDatTyl8dsSyRBHN4h0wzgNT29V/JjkS3LYwkGLLfUmMfeLXFyIfEPILAjYLFmnk3dA==
+  dependencies:
+    "@react-navigation/elements" "^1.3.6"
+    color "^4.2.3"
+    warn-once "^0.1.0"
 
 "@segment/loosely-validate-event@^2.0.0":
   version "2.0.0"
@@ -2433,6 +2450,11 @@ camelize@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/camelize/-/camelize-1.0.0.tgz#164a5483e630fa4321e5af07020e531831b2609b"
   integrity sha512-W2lPwkBkMZwFlPCXhIlYgxu+7gC/NUlCtdK652DAJ1JdgV0sTrvuPFshNPrFa1TY2JOkLhgdeEBplB4ezEa+xg==
+
+camelize@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/camelize/-/camelize-1.0.1.tgz#89b7e16884056331a35d6b5ad064332c91daa6c3"
+  integrity sha512-dU+Tx2fsypxTgtLoE36npi3UqcjSSMNYfkqgmoEhtZrraP5VWq0K7FkWVTYa8eMPtnU/G2txVsfdCJTn9uzpuQ==
 
 caniuse-lite@^1.0.30001400:
   version "1.0.30001418"

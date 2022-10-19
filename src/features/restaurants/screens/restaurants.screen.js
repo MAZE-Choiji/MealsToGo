@@ -1,36 +1,56 @@
-import React from "react";
-import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
-import { Searchbar } from "react-native-paper";
+import React, { useContext } from "react";
+import { FlatList, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
-import { RestaruantInfoCard } from "../components/restaurant-info-card.component";
+import { ActivityIndicator, Colors } from 'react-native-paper';
 
-export const RestaruantsScreen = () => {
+import { SafeArea } from "../../../components/utility/safe-area.component";
+import { Spacer } from "../../../components/spacer/spacer.component";
 
+import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
+
+import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
+import { Search } from "../components/search.component";
+
+export const RestaurantsScreen = ({ navigation }) => {
+  const { isLoading,  restaurants } = useContext(RestaurantsContext)
 
   return (
     <SafeArea >
-      <SearchContainer>
-        <Searchbar />
-      </SearchContainer>
-      <RestaruantList 
-        data={[{ name: 1 }, { name:2 }]}
-        renderItem={ () =><RestaruantInfoCard /> }
+      { isLoading && (
+        <LoadingContainer>
+          <Loading size={50} animating={true} color={Colors.blue300} />
+        </LoadingContainer>
+      )}
+      <Search/>
+      <RestaurantList 
+        data={ restaurants }
+        renderItem={ ({ item  }) => { 
+        return (
+          <TouchableOpacity onPress={ () => navigation.navigate("RestaurantDetail",{ restaurant: item, }) }>
+            <Spacer position="bottom" size="large">
+              <RestaurantInfoCard restaurant={ item } />
+            </Spacer>
+          </TouchableOpacity>
+        )
+      }}
         keyExtractor={ (item) => item.name }
       />
     </SafeArea>
   )
 }
 
-const SafeArea = styled(SafeAreaView)`
-  flex:1;
-  ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
-`
-const SearchContainer = styled.View`
-  padding: ${ (props) => props.theme.space[3] };
-`
-const RestaruantList = styled(FlatList).attrs({
+const RestaurantList = styled(FlatList).attrs({
   contentContainerStyle:{
     padding: 16,
   }
 })``;
+
+const Loading = styled(ActivityIndicator)`
+  margin-left: -25px;
+`;
+const LoadingContainer = styled.View`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+`;
 
