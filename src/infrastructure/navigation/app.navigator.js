@@ -42,9 +42,9 @@ export const AppNavigator = () => (
           inactiveTintColor: "gray",
         }}
       >
-        <Tab.Screen name="Restaurants" component={ RestaurantsNavigator } />
+        <Tab.Screen name="Restaurants" component={ RestaurantsNavigator } options={{headerShown:false}}/>
         <Tab.Screen name="Map" component={ MapScreen } />
-        <Tab.Screen name="Settings" component={ SettingsNavigator } />
+        <Tab.Screen name="Settings" component={ SettingsNavigator } options={{headerShown:false}}/>
       </Tab.Navigator>
     </RestaurantsContextProvider>
   </LocationContextProvider>
