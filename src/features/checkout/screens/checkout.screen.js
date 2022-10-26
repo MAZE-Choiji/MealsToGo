@@ -19,7 +19,8 @@ import {
   PaymentProcessing,
 } from "../components/checkout.styles";
 import { RestaurantInfoCard } from "../../restaurants/components/restaurant-info-card.component";
-// import { payRequest } from "../../../services/checkout/checkout.service";
+import { payRequest } from "../../../../functions/pay";
+
 
 export const CheckoutScreen = ({ navigation }) => {
   const { cart, restaurant, clearCart, sum } = useContext(CartContext);
@@ -27,28 +28,28 @@ export const CheckoutScreen = ({ navigation }) => {
   const [card, setCard] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // const onPay = () => {
-  //   setIsLoading(true);
-  //   if (!card || !card.id) {
-  //     setIsLoading(false);
-  //     navigation.navigate("CheckoutError", {
-  //       error: "Please fill in a valid credit card",
-  //     });
-  //     return;
-  //   }
-  //   payRequest(card.id, sum, name)
-  //     .then((result) => {
-  //       setIsLoading(false);
-  //       clearCart();
-  //       navigation.navigate("CheckoutSuccess");
-  //     })
-  //     .catch((err) => {
-  //       setIsLoading(false);
-  //       navigation.navigate("CheckoutError", {
-  //         error: err,
-  //       });
-  //     });
-  // };
+  const onPay = () => {
+    setIsLoading(true);
+    if (!card || !card.id) {
+      setIsLoading(false);
+      navigation.navigate("CheckoutError", {
+        error: "Please fill in a valid credit card",
+      });
+      return;
+    }
+    payRequest(card.id, sum, name)
+      .then((result) => {
+        setIsLoading(false);
+        clearCart();
+        navigation.navigate("CheckoutSuccess");
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        navigation.navigate("CheckoutError", {
+          error: err,
+        });
+      });
+  };
 
   if (!cart.length || !restaurant) {
     return (
@@ -85,17 +86,17 @@ export const CheckoutScreen = ({ navigation }) => {
         <Divider />
         <NameInput
           label="Name"
-          value={name}
-          onChangeText={(t) => {
+          value={ name }
+          onChangeText={ (t) => {
             setName(t);
           }}
         />
         <Spacer position="top" size="large">
           {name.length > 0 && (
             <CreditCardInput
-              name={name}
-              onSuccess={setCard}
-              onError={() =>
+              name={ name }
+              onSuccess={ setCard }
+              onError={() => 
                 navigation.navigate("CheckoutError", {
                   error: "Something went wrong processing your credit card",
                 })
@@ -104,21 +105,20 @@ export const CheckoutScreen = ({ navigation }) => {
           )}
         </Spacer>
         <Spacer position="top" size="xxl" />
-
         <PayButton
-          disabled={isLoading}
-          icon="cash-usd"
+          disabled={ isLoading }
+          icon="cash"
           mode="contained"
-          onPress={onPay}
+          onPress={ onPay }
         >
           Pay
         </PayButton>
         <Spacer position="top" size="large">
           <ClearButton
-            disabled={isLoading}
+            disabled={ isLoading }
             icon="cart-off"
             mode="contained"
-            onPress={clearCart}
+            onPress={ clearCart }
           >
             Clear Cart
           </ClearButton>

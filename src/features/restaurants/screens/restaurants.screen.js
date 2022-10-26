@@ -14,13 +14,17 @@ import { FavouritesContext } from "../../../services/favourites/favourites.conte
 import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
 import { RestaurantList } from "../components/restaurant-list.styles";
 import { FadeInView } from "../../../components/animations/fade.animation";
+import { LocationContext } from "../../../services/location/location.context";
+import { Text } from "../../../components/typography/text.component";
 
 
 
 export const RestaurantsScreen = ({ navigation }) => {
-  const { isLoading, restaurants } = useContext(RestaurantsContext)
+  const { error : locationError } = useContext(LocationContext)
+  const { isLoading, restaurants, error } = useContext(RestaurantsContext)
   const { favourites } = useContext(FavouritesContext)
   const [isToggled, setIsToggled] = useState(false)
+  const hasError = !!error || !!locationError
   return (
     <SafeArea>
       { isLoading && (
@@ -33,6 +37,11 @@ export const RestaurantsScreen = ({ navigation }) => {
           favourites= { favourites }
           onNavigate= { navigation.navigate }
         /> }
+        { hasError && (
+          <Spacer position='left' size='large'>
+        <Text variant='error'>Something went wrong retrieving the data</Text>
+        </Spacer>
+        ) }
       <RestaurantList 
         data={ restaurants }
         renderItem={ ({ item  }) => { 

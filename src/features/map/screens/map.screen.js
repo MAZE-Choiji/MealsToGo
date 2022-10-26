@@ -6,7 +6,7 @@ import { RestaurantsContext } from "../../../services/restaurants/restaurants.co
 import { MapCallout } from "../components/map-callout.component";
 import { Search } from "../components/search.component";
 
-export const MapScreen = ({ navigation }) => {
+const RestaurantMap = ({ navigation }) => {
   const { location } = useContext(LocationContext);
   const { restaurants = [] } = useContext(RestaurantsContext);
 
@@ -51,6 +51,21 @@ export const MapScreen = ({ navigation }) => {
   </>
   )
 }
+
+export const MapScreen = () => {
+  const { location } = useContext(LocationContext);
+  if (!location) {
+    return (
+      <Map
+        region={{
+          latitude: 0,
+          longitude: 0,
+        }}
+      />
+    );
+  }
+  return <RestaurantMap />;
+};
 
 const Map = styled(MapView)`
   height: 100%;

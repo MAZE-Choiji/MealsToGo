@@ -1,7 +1,8 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
 import { AuthenticationContext } from "../authentication/authentication.context";
+
+
 
 export const CartContext = createContext();
 
@@ -16,7 +17,7 @@ export const CartContextProvider = ({ children }) => {
   const saveCart = async (rst, crt, uid) => {
     try {
       const jsonValue = JSON.stringify({ restaurant: rst, cart: crt });
-      await AsyncStorage.setItem(`@cart-${uid}`, jsonValue);
+      await AsyncStorage.setItem(`@cart-${ uid }`, jsonValue);
     } catch (e) {
       console.log("error storing", e);
     }
